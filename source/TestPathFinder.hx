@@ -5,6 +5,9 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.math.FlxMath;
 import flixel.group.FlxGroup;
+import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil.LineStyle;
+import flixel.math.FlxRandom;
 
 import de.polygonal.ai.pathfinding.AStar;
 import de.polygonal.ai.pathfinding.AStarWaypoint;
@@ -12,17 +15,10 @@ import de.polygonal.ds.ArrayList;
 import de.polygonal.ds.Graph;
 import de.polygonal.ds.GraphNode;
 
+using flixel.util.FlxSpriteUtil;
+
 class TestPathFinder extends FlxGroup
 {
-	static var NODE_RADIUS = 10;
-	static var ARC_OFFSET = 4;
-	
-	// static var _app:TestPathFinder;
-	// public static function main()
-	// {
-	// 	_app = new TestPathFinder();
-	// }
-	
 	var _graph:Graph<AStarWaypoint>;
 	var _wayPoints:ArrayList<CustomWaypoint>;
 	
@@ -32,17 +28,19 @@ class TestPathFinder extends FlxGroup
 	var _source:AStarWaypoint;
 	var _target:AStarWaypoint;
 	
-	// var _editor:Editor;
-	// var _info:String;
-	// var _vr:VectorRenderer;
+	var canvas:FlxSprite;
 	
-	public function new()
+	override public function new():Void
 	{
+		super();
 		_buildGraph();
 	}
 	
 	function _buildGraph()
 	{
+		canvas = new FlxSprite();
+		canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
+		add(canvas);
 		//an array of point coordinates:
 		//the first point's x coordinate is at index [0] and its y coordinate at index [1],
 		//followed by the coordinates of the remaining points.
@@ -75,13 +73,10 @@ class TestPathFinder extends FlxGroup
 			wp.node = _graph.addNode(_graph.createNode(wp));
 			
 			_wayPoints.pushBack(wp); //index => graph node
-			
-			// //create a button for each node
-			// var trigger = new Trigger(new CircleSurface(nodeX, nodeY, NODE_RADIUS));
-			// trigger.attach(this, TriggerEvent.CLICK);
-			
-			// //resolve waypoint from trigger
-			// trigger.userData = wp;
+
+			// make visual nodes
+			canvas.drawRect(wp.x, wp.y, 10, 10, FlxColor.RED);
+
 		}
 		
 		//create arcs between nodes
@@ -94,14 +89,37 @@ class TestPathFinder extends FlxGroup
 			var target = _wayPoints.get(index1).node;
 			
 			_graph.addMutualArc(source, target, 1);
+
+			// make visual arcs
+			var start = _wayPoints.get(index0);
+			var end = _wayPoints.get(index1);
+			var lineStyle:LineStyle = { thickness: 1, color: FlxColor.WHITE };
+			canvas.drawLine(start.x, start.y, end.x, end.y, lineStyle);
+
 		}
 
-		// trace(_graph);
+		// var arr = findShortestPath(_graph, _wayPoints.get(0), _wayPoints.get(8));
 
-		var arr = findShortestPath(_graph, _wayPoints.get(0), _wayPoints.get(8));
+		// trace(arr.toArray());
 
-		trace(arr.toArray());
+		// MenuState.makePacket(arr);
+		generateTestPackets(100);
 
+	}
+
+	private function generateTestPackets(num:Int = 1)
+	{	
+		for (i in 0...num)
+		{
+			var start = FlxG.random.int(0, _wayPoints.size-1);
+			var end = start;
+			while (start == end)
+			{
+				end = FlxG.random.int(0, _wayPoints.size-1);
+			}
+			var arr = findShortestPath(_graph, _wayPoints.get(start), _wayPoints.get(end));
+			MenuState.makePacket(arr);
+		}
 	}
 	
 	private function findShortestPath(graph:Graph<AStarWaypoint>, source:AStarWaypoint, target:AStarWaypoint):ArrayList<AStarWaypoint> 
