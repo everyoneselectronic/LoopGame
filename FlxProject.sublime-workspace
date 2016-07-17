@@ -1,0 +1,306 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"to",
+				"toArray(...)	Array<de.polygonal.ai.pathfinding.AStarWaypoint>"
+			],
+			[
+				"get",
+				"getData(...)	de.polygonal.ds.NativeArray<de.polygonal.ai.pathfinding.AStarWaypoint>"
+			],
+			[
+				"g",
+				"get(...)	de.polygonal.ai.pathfinding.AStarWaypoint"
+			],
+			[
+				"_",
+				"_path	de.polygonal.ds.ArrayList<de.polygonal.ai.pathfinding.AStarWaypoint>"
+			],
+			[
+				"par",
+				"parseInt( x : String )	Null<Int>"
+			],
+			[
+				"in",
+				"int( x : Float )	Int"
+			],
+			[
+				"pare",
+				"parseDrone(...)	Map<String, String>"
+			],
+			[
+				"prop",
+				"properties	Map<String, String>"
+			],
+			[
+				"pro",
+				"properties	Map<String, String>"
+			],
+			[
+				"my",
+				"myArray"
+			],
+			[
+				"file",
+				"File	sys.io"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 362.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/C/HaxeToolkit/haxe/lib/polygonal-ai/1,0,0/de/polygonal/ai/pathfinding/AStarWaypoint.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/Heapable.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-ai/1,0,0/de/polygonal/ai/pathfinding/AStar.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-ai/1,0,0/examples/astar/TestPathFinder.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/Heap.hx",
+		"/D/Projects/loop packets game/default/source/Editor.hx",
+		"/D/Projects/loop packets game/default/Project.xml",
+		"/C/HaxeToolkit/haxe/lib/polygonal-core/1,0,4/de/polygonal/core/event/Observable.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-gl/1,0,4/de/polygonal/gl/VectorRenderer.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-core/1,0,4/de/polygonal/core/event/ObserverMacro.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/tools/Bits.hx",
+		"/C/HaxeToolkit/haxe/lib/polygonal-ds/1,4,1/de/polygonal/ds/Bits.hx",
+		"/C/HaxeToolkit/haxe/lib/flixel/4,1,0/flixel/system/macros/FlxDefines.hx",
+		"/D/My Files/Desktop/NetworkGame-master/gameengine/app.js",
+		"/D/My Files/Desktop/NetworkGame-master/gameengine/Packet.js",
+		"/C/HaxeToolkit/haxe/lib/polygonal-ai/1,0,0/examples/astar/CustomWaypoint.hx",
+		"/D/My Files/Downloads/DuskersGameEditor/DuskersGameEditor.exe.config",
+		"/D/My Files/Documents/My Games/Duskers/data/udata/DEFAULT/gd_1035851646.txt",
+		"/D/Projects/Duskers Save Editor/data.txt",
+		"/D/Projects/Duskers Save Editor/default/source/PlayState.hx",
+		"/D/My Files/Documents/My Games/Duskers/data/udata/DEFAULT/universedata.txt",
+		"/D/My Files/Downloads/download.htm",
+		"/D/My Files/Desktop/New folder/w.dat",
+		"/D/My Files/Desktop/New folder/drone.txt",
+		"/D/My Files/Desktop/New folder/as.txt",
+		"/D/Projects/Duskers Save Editor/default/source/Drone.hx",
+		"/D/Projects/Duskers Save Editor/FileBrowse/source/PlayState.hx",
+		"/D/Projects/Crash in Progress/game/default/source/Citizens.hx",
+		"/D/Projects/Duskers Save Editor/default/Project.xml",
+		"/D/Projects/Duskers Save Editor/default/source/Main.hx",
+		"/D/Projects/Duskers Save Editor/default/assets/data/Duskers/data/udata/DEFAULT/universedata.txt",
+		"/D/Projects/Duskers Save Editor/FileBrowse/source/Main.hx",
+		"/D/My Files/Downloads/DuskersGameEditor/DuskersGameEditor.exe",
+		"/D/My Files/Downloads/DuskersGameEditor/DuskersGameEditor.vshost.exe.config",
+		"/D/My Files/Downloads/DuskersGameEditor/Microsoft.Expression.Interactions.xml",
+		"/D/My Files/Downloads/DuskersGameEditor/Newtonsoft.Json.xml",
+		"/D/My Files/Documents/My Games/Duskers - Copy (2)/data/udata/DEFAULT/galaxydata.txt",
+		"/D/My Files/Documents/My Games/Duskers - Copy/data/udata/DEFAULT/universedata.txt",
+		"/C/Users/XZULUX/AppData/Local/Tvsukernel/Tvsukernel.exe_Url_o3pckra4sglbcagdyun3qcwyge2ojtdq/5.7.0.29/user.config",
+		"/D/My Files/Documents/GuacameleeSTCE - Copy (4)/SAVE.DAT",
+		"/D/GOG Games - Copy/Guacamelee! Super Turbo Championship Edition/SAVE.TXT",
+		"/D/GOG Games - Copy/Guacamelee! Super Turbo Championship Edition/index.html"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\HaxeToolkit\\haxe\\lib\\polygonal-core\\1,0,4\\de\\polygonal\\core"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"n get",
+			"toArray",
+			"AStarWaypoint",
+			"path",
+			"pathExists",
+			"return",
+			"_astar",
+			"addMutualArc",
+			"wp",
+			"userData",
+			"_target",
+			"mSize",
+			"pop()",
+			"size",
+			"_que",
+			"_info",
+			"_app",
+			"_editor",
+			"VectorRenderer",
+			"_editor",
+			"_astar",
+			"type",
+			"trigger",
+			"DynamicObjectPool",
+			"DA",
+			"Bits",
+			"DA",
+			"INVITMs",
+			"318864108",
+			"OBJ_732428772",
+			"yatt",
+			"string",
+			"OBJ_732428772",
+			"856517923",
+			":",
+			"id=",
+			"id",
+			"SLOT_",
+			", ",
+			":",
+			"d",
+			":",
+			"1460283274"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"\n",
+			",\n\n",
+			":\n",
+			"\n"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "FlxProject.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 223.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
