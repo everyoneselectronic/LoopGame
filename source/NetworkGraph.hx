@@ -17,18 +17,17 @@ import de.polygonal.ds.GraphNode;
 
 using flixel.util.FlxSpriteUtil;
 
-class TestPathFinder extends FlxGroup
+class NetworkGraph extends FlxGroup
 {
-	var _graph:Graph<AStarWaypoint>;
-	var _wayPoints:ArrayList<CustomWaypoint>;
+	private var _graph:Graph<AStarWaypoint>;
+	private var _wayPoints:ArrayList<CustomWaypoint>;
 	
-	var _astar:AStar;
-	// var _path:ArrayList<AStarWaypoint>;
+	private var _astar:AStar;
 	
-	var _source:AStarWaypoint;
-	var _target:AStarWaypoint;
+	private var _source:AStarWaypoint;
+	private var _target:AStarWaypoint;
 	
-	var canvas:FlxSprite;
+	private var _canvas:FlxSprite;
 	
 	override public function new():Void
 	{
@@ -38,9 +37,9 @@ class TestPathFinder extends FlxGroup
 	
 	function _buildGraph()
 	{
-		canvas = new FlxSprite();
-		canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
-		add(canvas);
+		_canvas = new FlxSprite();
+		_canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
+		add(_canvas);
 		//an array of point coordinates:
 		//the first point's x coordinate is at index [0] and its y coordinate at index [1],
 		//followed by the coordinates of the remaining points.
@@ -75,7 +74,7 @@ class TestPathFinder extends FlxGroup
 			_wayPoints.pushBack(wp); //index => graph node
 
 			// make visual nodes
-			canvas.drawRect(wp.x, wp.y, 10, 10, FlxColor.RED);
+			_canvas.drawRect(wp.x, wp.y, 10, 10, FlxColor.RED);
 
 		}
 		
@@ -94,44 +93,49 @@ class TestPathFinder extends FlxGroup
 			var start = _wayPoints.get(index0);
 			var end = _wayPoints.get(index1);
 			var lineStyle:LineStyle = { thickness: 1, color: FlxColor.WHITE };
-			canvas.drawLine(start.x, start.y, end.x, end.y, lineStyle);
+			_canvas.drawLine(start.x, start.y, end.x, end.y, lineStyle);
 
 		}
 
-		// var arr = findShortestPath(_graph, _wayPoints.get(0), _wayPoints.get(8));
-
-		// trace(arr.toArray());
-
-		// MenuState.makePacket(arr);
-		generateTestPackets(100);
+		// generateTestPackets(100);
 
 	}
 
-	private function generateTestPackets(num:Int = 1)
-	{	
-		for (i in 0...num)
-		{
-			var start = FlxG.random.int(0, _wayPoints.size-1);
-			var end = start;
-			while (start == end)
-			{
-				end = FlxG.random.int(0, _wayPoints.size-1);
-			}
-			var arr = findShortestPath(_graph, _wayPoints.get(start), _wayPoints.get(end));
-			MenuState.makePacket(arr);
-		}
-	}
+	// private function generateTestPackets(num:Int = 1)
+	// {	
+	// 	for (i in 0...num)
+	// 	{
+	// 		var start = FlxG.random.int(0, _wayPoints.size-1);
+	// 		var end = start;
+	// 		while (start == end)
+	// 		{
+	// 			end = FlxG.random.int(0, _wayPoints.size-1);
+	// 		}
+	// 		var arr = findShortestPath(_graph, _wayPoints.get(start), _wayPoints.get(end));
+	// 		MenuState.makePacket(arr);
+	// 	}
+	// }
 	
-	private function findShortestPath(graph:Graph<AStarWaypoint>, source:AStarWaypoint, target:AStarWaypoint):ArrayList<AStarWaypoint> 
+	public function findShortestPath(source:AStarWaypoint, target:AStarWaypoint):ArrayList<AStarWaypoint> 
 	{
 		/*///////////////////////////////////////////////////////
 		// find shortest path from first to second node
 		///////////////////////////////////////////////////////*/
 		var path = new ArrayList<AStarWaypoint>();
-		var pathExists = _astar.find(graph, source, target, path);
-		
+		var pathExists = _astar.find(_graph, source, target, path);
 		// trace('path exists: $pathExists');
 		// trace('waypoints : $path');
 		return path;
 	}
+
+	public function get_graph():Graph<AStarWaypoint>
+	{
+		return _graph;
+	}
+
+	public function get_waypoints():ArrayList<CustomWaypoint>
+	{
+		return _wayPoints;
+	}
+	
 }

@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxBasic;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
@@ -10,6 +11,7 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.util.FlxTimer;
 
 import de.polygonal.ai.pathfinding.AStar;
 import de.polygonal.ai.pathfinding.AStarWaypoint;
@@ -17,31 +19,31 @@ import de.polygonal.ds.ArrayList;
 import de.polygonal.ds.Graph;
 import de.polygonal.ds.GraphNode;
 
-class Packet extends FlxSprite
+class Packet extends FlxBasic
 {
-
+	// private var ID:Int = 0;
 	private var	_route:ArrayList<AStarWaypoint>;
 	private var	_routePostion:Int = 0;
 	private var _speed:Float = 100.0;
 	
-	override public function new(route:ArrayList<AStarWaypoint>):Void
+	public function new(route:ArrayList<AStarWaypoint>):Void
 	{
 		_route = route;
-		send(null);
 		super();
 	}
 
-	override public function update(elapsed:Float):Void
-	{
-		super.update(elapsed);
-	}
+	// override public function update(elapsed:Float):Void
+	// {
+	// 	super.update(elapsed);
+	// }
 
-	public function send(Tween:FlxTween):Void
+
+	public function send(Timer:FlxTimer):Void
 	{
 		var currentPosition = _routePostion;
 
 		// var packetTime = FlxG.random.float(2.0,5.0);
-		trace("Packet_" + ID + " at " + _route.get(_routePostion));
+		// trace("Packet_" + ID + " at " + _route.get(_routePostion));
 		_routePostion++;
 
 		if (_routePostion < _route.size)
@@ -50,12 +52,17 @@ class Packet extends FlxSprite
 			var nextNode = _route.get(_routePostion);
 			var distance = currentNode.distanceTo(nextNode);
 			var packetTime = distance/_speed;
-			FlxTween.tween( this, { x: nextNode.x, y: nextNode.y }, packetTime, { onComplete: send } );
+
+
+			// time (seconds), callback, loops
+			new FlxTimer().start(packetTime, send);
+
+			// FlxTween.tween( this, { x: nextNode.x, y: nextNode.y }, packetTime, { onComplete: send } );
 
 		}
 		else
 		{
-			trace("Packet_" + ID + " arrived");
+			// trace("Packet_" + ID + " arrived");
 			destroy();
 		}
 	}
