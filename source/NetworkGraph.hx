@@ -96,26 +96,8 @@ class NetworkGraph extends FlxGroup
 			_canvas.drawLine(start.x, start.y, end.x, end.y, lineStyle);
 
 		}
-
-		// generateTestPackets(100);
-
 	}
 
-	// private function generateTestPackets(num:Int = 1)
-	// {	
-	// 	for (i in 0...num)
-	// 	{
-	// 		var start = FlxG.random.int(0, _wayPoints.size-1);
-	// 		var end = start;
-	// 		while (start == end)
-	// 		{
-	// 			end = FlxG.random.int(0, _wayPoints.size-1);
-	// 		}
-	// 		var arr = findShortestPath(_graph, _wayPoints.get(start), _wayPoints.get(end));
-	// 		MenuState.makePacket(arr);
-	// 	}
-	// }
-	
 	public function findShortestPath(source:AStarWaypoint, target:AStarWaypoint):ArrayList<AStarWaypoint> 
 	{
 		/*///////////////////////////////////////////////////////
@@ -136,6 +118,12 @@ class NetworkGraph extends FlxGroup
 	public function get_waypoints():ArrayList<CustomWaypoint>
 	{
 		return _wayPoints;
+	}
+
+	public function get_node(index):AStarWaypoint
+	{
+		var node = _wayPoints.get(index).node;
+		return node;
 	}
 	
 }

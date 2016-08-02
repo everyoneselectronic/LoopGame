@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"_",
+				"_packets"
+			],
+			[
+				"astar",
+				"AStarWaypoint	de.polygonal.ai.pathfinding"
+			],
+			[
+				"pac",
+				"packetGroups	Array<Int>"
+			],
+			[
+				"pack",
+				"packetGroups"
+			],
+			[
+				"num",
+				"numPackets	Int"
+			],
+			[
+				"gr",
+				"groupSize"
+			],
+			[
+				"packet",
+				"packetGroups	var"
+			],
+			[
+				"in",
+				"int(...)	Int"
+			],
+			[
+				"Flx",
+				"FlxG	flixel"
+			],
+			[
+				"time",
+				"timeToSend	Int"
+			],
+			[
+				"end",
+				"endNode"
+			],
+			[
+				"start",
+				"startNode"
+			],
+			[
+				"int",
+				"Int	class"
+			],
+			[
+				"p",
+				"push( x : Int )	Int"
+			],
+			[
+				"i",
+				"int(...)	Int"
+			],
+			[
 				"f",
 				"_fpsCounter"
 			],
@@ -28,16 +88,8 @@
 				"get(...)	de.polygonal.ai.pathfinding.AStarWaypoint"
 			],
 			[
-				"_",
-				"_path	de.polygonal.ds.ArrayList<de.polygonal.ai.pathfinding.AStarWaypoint>"
-			],
-			[
 				"par",
 				"parseInt( x : String )	Null<Int>"
-			],
-			[
-				"in",
-				"int( x : Float )	Int"
 			],
 			[
 				"pare",
@@ -75,7 +127,15 @@
 			"file": "source/NetworkController.hx",
 			"settings":
 			{
-				"buffer_size": 1448,
+				"buffer_size": 2666,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/NetworkGraph.hx",
+			"settings":
+			{
+				"buffer_size": 3514,
 				"line_ending": "Windows"
 			}
 		},
@@ -83,7 +143,7 @@
 			"file": "source/Packet.hx",
 			"settings":
 			{
-				"buffer_size": 1936,
+				"buffer_size": 988,
 				"line_ending": "Windows"
 			}
 		}
@@ -270,7 +330,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -299,7 +359,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -308,15 +368,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1448,
+						"buffer_size": 2666,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								733,
-								733
+								1950,
+								1950
 							]
 						],
 						"settings":
@@ -326,7 +386,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1478.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -334,19 +394,49 @@
 				},
 				{
 					"buffer": 2,
-					"file": "source/Packet.hx",
+					"file": "source/NetworkGraph.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1936,
+						"buffer_size": 3514,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1250,
-								1250
+								3505,
+								3505
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 2138.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "source/Packet.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 988,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								978,
+								978
 							]
 						],
 						"settings":
@@ -356,7 +446,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 747.0,
+						"translation.y": 303.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -446,7 +536,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 223.0,
+	"side_bar_width": 165.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

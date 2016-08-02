@@ -21,70 +21,20 @@ import de.polygonal.ds.GraphNode;
 
 class Packet extends FlxBasic
 {
-	// private var ID:Int = 0;
+	private var	_id:Int;
 	private var	_route:ArrayList<AStarWaypoint>;
-	private var	_routePostion:Int = 0;
-	private var _speed:Float = 100.0;
+	private var _name:String;
+	private var _startNode:AStarWaypoint;
+	private var _endNode:AStarWaypoint;
 	
-	public function new(route:ArrayList<AStarWaypoint>):Void
+	public function new(id:Int, name:String, startNode:AStarWaypoint, endNode:AStarWaypoint, route:ArrayList<AStarWaypoint>):Void
 	{
+		_id = id;
 		_route = route;
+		_name = name;
+		_startNode = startNode;
+		_endNode = endNode;
 		super();
 	}
-
-	// override public function update(elapsed:Float):Void
-	// {
-	// 	super.update(elapsed);
-	// }
-
-
-	public function send(Timer:FlxTimer):Void
-	{
-		var packetdata:Array<Int> = new Array<Int>();
-
-		// node - time at node - 
-
-		// 	id:2 - 0s
-		//  id:18 - 200s
-		var currentPosition:Int = 0;
-		var currNode = _route.get(currentPosition);
-		var prevNode = currNode;
-
-		for (n in _route)
-		{
-			if (currNode == prevNode)
-			{
-				// packetdata.push(n);
-			}
-
-		}
-
-		var currentPosition = _routePostion;
-
-		// var packetTime = FlxG.random.float(2.0,5.0);
-		// trace("Packet_" + ID + " at " + _route.get(_routePostion));
-		_routePostion++;
-
-		if (_routePostion < _route.size)
-		{
-			var currentNode = _route.get(currentPosition);
-			var nextNode = _route.get(_routePostion);
-			var distance = currentNode.distanceTo(nextNode);
-			var packetTime = distance/_speed;
-
-
-			// time (seconds), callback, loops
-			new FlxTimer().start(packetTime, send);
-
-			// FlxTween.tween( this, { x: nextNode.x, y: nextNode.y }, packetTime, { onComplete: send } );
-
-		}
-		else
-		{
-			// trace("Packet_" + ID + " arrived");
-			destroy();
-		}
-	}
-
 
 }
