@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"f",
+				"_fpsCounter"
+			],
+			[
+				"flxg",
+				"FlxGame	flixel"
+			],
+			[
+				"fr",
+				"updateFramerate	Int"
+			],
+			[
 				"to",
 				"toArray(...)	Array<de.polygonal.ai.pathfinding.AStarWaypoint>"
 			],
@@ -51,6 +63,30 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "source/Main.hx",
+			"settings":
+			{
+				"buffer_size": 261,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/NetworkController.hx",
+			"settings":
+			{
+				"buffer_size": 1448,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "source/Packet.hx",
+			"settings":
+			{
+				"buffer_size": 1936,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -89,9 +125,24 @@
 	},
 	"expanded_folders":
 	[
+		"/D/Projects/loop packets game/default",
+		"/D/Projects/loop packets game/default/source"
 	],
 	"file_history":
 	[
+		"/D/Projects/loop packets game/default/source/MenuState.hx",
+		"/D/My Files/Desktop/DoaSJ SaveEditor/commonTrash.xml",
+		"/D/My Files/Desktop/DoaSJ SaveEditor/New folder/Ghost.cs",
+		"/C/Users/XZULUX/.babun/cygwin/usr/share/zsh/5.0.6/help/emulate",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.gitconfig",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.oh-my-zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.oh-my-zsh/plugins/colorize/colorize.plugin.zsh",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.zsh-update",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.babunrc",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.oh-my-zsh/.gitignore",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.zcompdump",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.zcompdump-XZULUX-PC-5.0.6",
+		"/C/Users/XZULUX/.babun/cygwin/home/XZULUX/.zshrc",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ai/1,0,0/de/polygonal/ai/pathfinding/AStarWaypoint.hx",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/Heapable.hx",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ai/1,0,0/de/polygonal/ai/pathfinding/AStar.hx",
@@ -137,7 +188,7 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -149,9 +200,12 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"beb",
+			"<edible>true</edible>",
+			"color",
 			"n get",
 			"toArray",
 			"AStarWaypoint",
@@ -216,8 +270,98 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "source/Main.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 261,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								108,
+								108
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "source/NetworkController.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1448,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								733,
+								733
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "source/Packet.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1936,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1250,
+								1250
+							]
+						],
+						"settings":
+						{
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 747.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -252,6 +396,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 253.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0

@@ -40,6 +40,25 @@ class Packet extends FlxBasic
 
 	public function send(Timer:FlxTimer):Void
 	{
+		var packetdata:Array<Int> = new Array<Int>();
+
+		// node - time at node - 
+
+		// 	id:2 - 0s
+		//  id:18 - 200s
+		var currentPosition:Int = 0;
+		var currNode = _route.get(currentPosition);
+		var prevNode = currNode;
+
+		for (n in _route)
+		{
+			if (currNode == prevNode)
+			{
+				// packetdata.push(n);
+			}
+
+		}
+
 		var currentPosition = _routePostion;
 
 		// var packetTime = FlxG.random.float(2.0,5.0);

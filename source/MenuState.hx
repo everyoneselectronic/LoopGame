@@ -7,6 +7,9 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+
+import flixel.FlxGame;
+
 // import flixel.group.FlxGroup.FlxTypedGroup;
 
 // import de.polygonal.ai.pathfinding.AStar;
@@ -17,10 +20,6 @@ import flixel.util.FlxColor;
 
 class MenuState extends FlxState
 {
-
-	// private static var packets:FlxTypedGroup<Packet>;
-	private var _fpsCounter:FlxText;
-
 	override public function create():Void
 	{
 		// packets = new FlxTypedGroup<Packet>();
@@ -31,10 +30,6 @@ class MenuState extends FlxState
 
 		var network = new NetworkController();
 		add(network);
-
-		_fpsCounter = new FlxText(10, 10, FlxG.width, "FPS: " + 30);
-		_fpsCounter.setFormat(null, 22, FlxColor.WHITE, CENTER);
-		add(_fpsCounter);
 		
 		super.create();
 	}
@@ -42,8 +37,6 @@ class MenuState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-
-		_fpsCounter.text = "FPS: " + FlxG.drawFramerate;
 	}
 
 	// public static function makePacket(route)

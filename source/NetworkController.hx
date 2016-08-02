@@ -30,7 +30,7 @@ class NetworkController extends FlxGroup
 		add(_graph);
 		add(_packets);
 
-		generateTestPackets(10000);
+		// generateTestPackets(10000);
 	}
 	
 	private function generateTestPackets(num:Int = 1)
