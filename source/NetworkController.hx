@@ -24,44 +24,104 @@ class NetworkController extends FlxGroup
 	{
 		super();
 
-		_packets = new FlxTypedGroup<Packet>();
 		_graph = new NetworkGraph();
+		_packets = new FlxTypedGroup<Packet>();
 		
 		add(_graph);
 		add(_packets);
 
-		// generateTestPackets(10000);
+		generateTestPackets();
+
+		trace(_packets);
 	}
 	
-	private function generateTestPackets(num:Int = 1)
+	private function generateTestPackets()
 	{
 		var wayPoints = _graph.get_waypoints();
-		for (i in 0...num)
+
+		var w = wayPoints.get(0);
+
+		// var packets:Array<Packet> = new Array<Packet>();
+
+		var currentNode = w;
+
+		var timeFrame:Int = 1000;
+		var baseTime:Int = 0;
+		var endTime:Int = baseTime + timeFrame;
+		var timesUsed:Array<Int> = new Array<Int>();
+
+		// total packets to be sent from this node
+		var numPackets:Int = FlxG.random.int(100,500);
+
+		// make packet groups
+		var packetGroups:Array<Int> = new Array<Int>();
+		var count = 0;
+
+		while (count < numPackets)
 		{
-			var start = FlxG.random.int(0, wayPoints.size-1);
-			var end = start;
-			while (start == end)
+			var groupSize = FlxG.random.int(2, 21);
+
+			if (groupSize + count > numPackets)
 			{
-				end = FlxG.random.int(0, wayPoints.size-1);
+				groupSize = numPackets - count;
 			}
-			var arr = _graph.findShortestPath(wayPoints.get(start), wayPoints.get(end));
-			makePacket(arr);
+			else
+			{
+				count += groupSize;
+			}
+
+			packetGroups.push(groupSize);
 		}
+
+
+		// generate packets
+		count = 0;
+
+		for (i in 0...packetGroups.length)
+		{
+			for (p in 0...packetGroups[i])
+			{
+				var id = count;
+
+				// name = node_id_partNum
+				var partNum:Int = p;
+				if (partNum < 10) partNum = "0" + p;
+				var name:String = currentNode.id + "_" + id + "_" + p + "/" + packetGroups[i];
+
+				// set startNode
+				var startNode:AStarWaypoint = currentNode;
+
+				// set endNode
+				var e = 
+				var endNode:AStarWaypoint = ;
+
+				var route:ArrayList<AStarWaypoint> = _graph.findShortestPath(startNode, endNode);
+
+				// send time to send 
+				var timeToSend:Int = FlxG.random.int(baseTime, endTime, timesUsed);
+				timesUsed.push(timeToSend);
+
+				var packet = new Packet(id, name, startNode, endNode, route);
+				_packets.add(packet);
+				count++;
+			}
+		}
+
 	}
 
-	private function makePacket(route)
-	{
-		var packet = new Packet(route);
-		packet.ID = _packets.length;
-		// packet.makeGraphic(4,10,FlxG.random.color());
+	// private function makePacket(route)
+	// {
+	// 	var packet = new Packet(route);
+	// 	packet.ID = _packets.length;
+	// 	// packet.makeGraphic(4,10,FlxG.random.color());
 
-		// var start = route.get(0);
-		// packet.setPosition(start.x,start.y);
+	// 	// var start = route.get(0);
+	// 	// packet.setPosition(start.x,start.y);
 
-		_packets.add(packet);
+	// 	_packets.add(packet);
 
-		packet.send(null);
-		// packet.velocity.y = 2;
-	}
+	// 	packet.send(null);
+	// 	// packet.velocity.y = 2;
+	// }
 	
 }
