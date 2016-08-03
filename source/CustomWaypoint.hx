@@ -12,6 +12,6 @@ class CustomWaypoint extends AStarWaypoint
 	
 	override public function toString():String 
 	{
-		return '{ CustomWaypoint id: $id }';
+		return Std.string(id);
 	}
 }

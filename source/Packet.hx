@@ -37,4 +37,32 @@ class Packet extends FlxBasic
 		super();
 	}
 
+	override public function toString():String 
+	{
+		var route:String = "[ ";
+		for (n in 0..._route.size)
+		{
+			var c:String = ", ";
+			if (n == _route.size-1) c = " ]";
+			var s = _route.get(n) + c;
+			route += s;
+		}
+
+		return "name:" + _name + ", start:" + _startNode + ", end:" + _endNode + ", route:" + route;
+	}
+
+	public function toCss():String 
+	{
+		var route:String = "[";
+		for (n in 0..._route.size)
+		{
+			var c:String = "-";
+			if (n == _route.size-1) c = "]";
+			var s = _route.get(n) + c;
+			route += s;
+		}
+
+		return _name + "," + _startNode + "," + _endNode + "," + route;
+	}
+
 }

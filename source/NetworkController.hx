@@ -8,6 +8,7 @@ import flixel.group.FlxGroup;
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil.LineStyle;
 import flixel.math.FlxRandom;
+// import flixel.util.FlxSave;
 
 import de.polygonal.ai.pathfinding.AStar;
 import de.polygonal.ai.pathfinding.AStarWaypoint;
@@ -20,6 +21,8 @@ class NetworkController extends FlxGroup
 	private var _packets:FlxTypedGroup<Packet>;
 	private var _graph:NetworkGraph;
 
+	// private var _gameSave:FlxSave;
+
 	override public function new():Void
 	{
 		super();
@@ -30,16 +33,22 @@ class NetworkController extends FlxGroup
 		add(_graph);
 		add(_packets);
 
+
 		generateTestPackets();
 
-		trace(_packets);
+
+		for (p in _packets)
+		{
+			trace(p.toCss());
+		}
+
 	}
-	
+
 	private function generateTestPackets()
 	{
-		var wayPoints = _graph.get_waypoints();
+		var waypoints = _graph.get_waypoints();
 
-		var w = wayPoints.get(0);
+		var w = waypoints.get(0);
 
 		// var packets:Array<Packet> = new Array<Packet>();
 
@@ -52,6 +61,7 @@ class NetworkController extends FlxGroup
 
 		// total packets to be sent from this node
 		var numPackets:Int = FlxG.random.int(100,500);
+		trace(numPackets);
 
 		// make packet groups
 		var packetGroups:Array<Int> = new Array<Int>();
@@ -59,16 +69,19 @@ class NetworkController extends FlxGroup
 
 		while (count < numPackets)
 		{
-			var groupSize = FlxG.random.int(2, 21);
+			var groupSize = FlxG.random.int(1, 21);
 
-			if (groupSize + count > numPackets)
+			if ((groupSize + count) > numPackets)
 			{
 				groupSize = numPackets - count;
+				count = numPackets;
 			}
 			else
 			{
 				count += groupSize;
 			}
+
+			trace(count);
 
 			packetGroups.push(groupSize);
 		}
@@ -84,16 +97,19 @@ class NetworkController extends FlxGroup
 				var id = count;
 
 				// name = node_id_partNum
-				var partNum:Int = p;
-				if (partNum < 10) partNum = "0" + p;
-				var name:String = currentNode.id + "_" + id + "_" + p + "/" + packetGroups[i];
+				var totalNum = packetGroups[i] - 1;
+				var partNum:String = p + "";
+				if (p < 10) partNum = "0" + p;
+				var name:String = currentNode.id + "_" + id + "_" + p + "/" + totalNum;
 
 				// set startNode
 				var startNode:AStarWaypoint = currentNode;
 
 				// set endNode
-				var e = 
-				var endNode:AStarWaypoint = ;
+				var a:Array<Int> = [currentNode.id];
+				var n = FlxG.random.int(0, waypoints.size - 1, a );
+				var e = waypoints.get(n);
+				var endNode:AStarWaypoint = e;
 
 				var route:ArrayList<AStarWaypoint> = _graph.findShortestPath(startNode, endNode);
 
@@ -103,6 +119,7 @@ class NetworkController extends FlxGroup
 
 				var packet = new Packet(id, name, startNode, endNode, route);
 				_packets.add(packet);
+
 				count++;
 			}
 		}

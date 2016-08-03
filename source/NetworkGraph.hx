@@ -122,7 +122,7 @@ class NetworkGraph extends FlxGroup
 
 	public function get_node(index):AStarWaypoint
 	{
-		var node = _wayPoints.get(index).node;
+		var node = _wayPoints.get(index);
 		return node;
 	}
 	
