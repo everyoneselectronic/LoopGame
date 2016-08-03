@@ -21,7 +21,7 @@ class NetworkController extends FlxGroup
 	private var _packets:FlxTypedGroup<Packet>;
 	private var _graph:NetworkGraph;
 
-	// private var _gameSave:FlxSave;
+	private var _networkData:Array<Array<Int>>;
 
 	override public function new():Void
 	{
@@ -36,72 +36,62 @@ class NetworkController extends FlxGroup
 
 		generateTestPackets();
 
-
 		for (p in _packets)
 		{
 			trace(p.toCss());
+		}
+
+		for (d in _networkData)
+		{
+			trace(d);
 		}
 
 	}
 
 	private function generateTestPackets()
 	{
+		_networkData = new Array<Array<Int>>();
+
 		var waypoints = _graph.get_waypoints();
-
-		var w = waypoints.get(0);
-
-		// var packets:Array<Packet> = new Array<Packet>();
-
-		var currentNode = w;
-
 		var timeFrame:Int = 1000;
 		var baseTime:Int = 0;
 		var endTime:Int = baseTime + timeFrame;
-		var timesUsed:Array<Int> = new Array<Int>();
 
-		// total packets to be sent from this node
-		var numPackets:Int = FlxG.random.int(100,500);
-		trace(numPackets);
+		var packetID:Int = 0;
 
-		// make packet groups
-		var packetGroups:Array<Int> = new Array<Int>();
-		var count = 0;
-
-		while (count < numPackets)
+		// generate packets, packet groups for each node
+		for (node in waypoints)
 		{
-			var groupSize = FlxG.random.int(1, 21);
+			var currentNode = node;
 
-			if ((groupSize + count) > numPackets)
+			// total packets to be sent from this node
+			var numPackets:Int = FlxG.random.int(100,500);
+
+			// make packet groups
+			var packetGroups:Array<Int> = new Array<Int>();
+			var count:Int = 0;
+
+			while (count < numPackets)
 			{
-				groupSize = numPackets - count;
-				count = numPackets;
+				var groupSize = FlxG.random.int(1, 21);
+
+				if ((groupSize + count) > numPackets)
+				{
+					groupSize = numPackets - count;
+					count = numPackets;
+				}
+				else
+				{
+					count += groupSize;
+				}
+				packetGroups.push(groupSize);
 			}
-			else
+
+			// generate packets
+			var timesUsed:Array<Int> = new Array<Int>();
+
+			for (i in 0...packetGroups.length)
 			{
-				count += groupSize;
-			}
-
-			trace(count);
-
-			packetGroups.push(groupSize);
-		}
-
-
-		// generate packets
-		count = 0;
-
-		for (i in 0...packetGroups.length)
-		{
-			for (p in 0...packetGroups[i])
-			{
-				var id = count;
-
-				// name = node_id_partNum
-				var totalNum = packetGroups[i] - 1;
-				var partNum:String = p + "";
-				if (p < 10) partNum = "0" + p;
-				var name:String = currentNode.id + "_" + id + "_" + p + "/" + totalNum;
-
 				// set startNode
 				var startNode:AStarWaypoint = currentNode;
 
@@ -111,34 +101,70 @@ class NetworkController extends FlxGroup
 				var e = waypoints.get(n);
 				var endNode:AStarWaypoint = e;
 
+				// set route
 				var route:ArrayList<AStarWaypoint> = _graph.findShortestPath(startNode, endNode);
 
-				// send time to send 
-				var timeToSend:Int = FlxG.random.int(baseTime, endTime, timesUsed);
-				timesUsed.push(timeToSend);
+				for (p in 0...packetGroups[i])
+				{
+					var id = packetID;
 
-				var packet = new Packet(id, name, startNode, endNode, route);
-				_packets.add(packet);
+					// make name
+					var totalNum = packetGroups[i];
+					var partNum:Int = p + 1;
+					var partNumStr:String = partNum + "";
+					if (partNum < 10) partNumStr = "0" + partNum;
+					var name:String = currentNode.id + "_" + id + "_" + partNumStr + "/" + totalNum;
 
-				count++;
+					// send time to send 
+					// need to make increase from first packet
+					var timeToSend:Int = FlxG.random.int(baseTime, endTime, timesUsed);
+					timesUsed.push(timeToSend);
+
+					// calculate travel
+					var time:Int = timeToSend;
+					var pN:CustomWaypoint = currentNode;
+
+					for (n in route)
+					{
+						var data:Array<Int> = new Array<Int>();
+						if (n == pN)
+						{
+							data = [ packetID, currentNode.id, time ];
+						}
+						else
+						{
+							var s = pN;
+							var e = n;
+							var d:Float = s.distanceTo(e);
+
+							// divide by 10 to reduce times
+							time += Std.int(d/10);
+							
+							data = [ packetID, s.id, time ];
+						}
+
+						_networkData.push(data);
+
+						pN = n;
+					}	
+
+					// add to packet group
+					var packet = new Packet(id, name, startNode, endNode, route);
+					_packets.add(packet);
+
+					packetID++;
+				}
 			}
 		}
 
+
+		
+
 	}
 
-	// private function makePacket(route)
-	// {
-	// 	var packet = new Packet(route);
-	// 	packet.ID = _packets.length;
-	// 	// packet.makeGraphic(4,10,FlxG.random.color());
-
-	// 	// var start = route.get(0);
-	// 	// packet.setPosition(start.x,start.y);
-
-	// 	_packets.add(packet);
-
-	// 	packet.send(null);
-	// 	// packet.velocity.y = 2;
-	// }
+	private function makeNetworkData(route:ArrayList<AStarWaypoint>)
+	{
+			
+	}
 	
 }

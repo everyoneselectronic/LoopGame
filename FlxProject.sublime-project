@@ -20,6 +20,21 @@
 			"follow_symlinks": true,
 			"name": "Haxe",
 			"path": "C:\\HaxeToolkit\\haxe\\std"
-		}
+		},
+		{
+			"follow_symlinks": true,
+			"name": "polygonal-ds",
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\polygonal-ds/2,0,0-beta/"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "polygonal-printf",
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\polygonal-printf/1,0,2-beta/"
+		},
+		{
+			"follow_symlinks": true,
+			"name": "polygonal-ai",
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\polygonal-ai/1,0,0/"
+		},
 	]
 }
