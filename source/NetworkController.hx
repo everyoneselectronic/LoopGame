@@ -10,8 +10,9 @@ import flixel.util.FlxSpriteUtil.LineStyle;
 import flixel.math.FlxRandom;
 // import flixel.util.FlxSave;
 
-// import de.polygonal.ai.pathfinding.AStar;
-// import de.polygonal.ai.pathfinding.AStarWaypoint;
+import pathfinding.AStar;
+import pathfinding.AStarWaypoint;
+
 import de.polygonal.ds.ArrayList;
 import de.polygonal.ds.Graph;
 import de.polygonal.ds.GraphNode;

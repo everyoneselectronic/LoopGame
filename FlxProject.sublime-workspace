@@ -4,16 +4,24 @@
 		"selected_items":
 		[
 			[
+				"st",
+				"str"
+			],
+			[
+				"i",
+				"io	package"
+			],
+			[
+				"fp",
+				"fp	sys.io.FileOutput"
+			],
+			[
 				"ast",
 				"AStarWaypoint	class"
 			],
 			[
 				"g",
 				"get( i : Int )	CustomWaypoint"
-			],
-			[
-				"st",
-				"Std	class"
 			],
 			[
 				"_",
@@ -92,10 +100,6 @@
 				"push( x : Int )	Int"
 			],
 			[
-				"i",
-				"int(...)	Int"
-			],
-			[
 				"f",
 				"_fpsCounter"
 			],
@@ -151,15 +155,15 @@
 			"file": "source/NetworkController.hx",
 			"settings":
 			{
-				"buffer_size": 3321,
+				"buffer_size": 4051,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "assets/data/datatraffic.csv",
+			"file": "source/NetworkGraph.hx",
 			"settings":
 			{
-				"buffer_size": 123811,
+				"buffer_size": 3474,
 				"line_ending": "Windows"
 			}
 		},
@@ -167,7 +171,7 @@
 			"file": "source/Packet.hx",
 			"settings":
 			{
-				"buffer_size": 1580,
+				"buffer_size": 1550,
 				"line_ending": "Windows"
 			}
 		}
@@ -211,20 +215,22 @@
 	[
 		"/D/Projects/loop packets game/default",
 		"/D/Projects/loop packets game/default/assets",
-		"/D/Projects/loop packets game/default/assets/data",
-		"/D/Projects/loop packets game/default/source"
+		"/D/Projects/loop packets game/default/source",
+		"/D/Projects/loop packets game/default/source/pathfinding"
 	],
 	"file_history":
 	[
+		"/D/Projects/loop packets game/default/source/pathfinding/AStarWaypoint.hx",
+		"/D/Projects/loop packets game/default/source/pathfinding/AStar.hx",
+		"/D/Projects/loop packets game/default/source/CustomWaypoint.hx",
+		"/D/Projects/loop packets game/default/assets/data/datatraffic.csv",
 		"/C/MAMP/htdocs/boom.zip",
 		"/D/My Files/Downloads/ee458179-3cfc-4f0f-bf66-49535c4716c5",
-		"/D/Projects/loop packets game/default/assets/data/datatraffic.csv",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/NativeArray.hx",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/ArrayList.hx",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/Comparable.hx",
 		"/D/Projects/loop packets game/default/source/NetworkGraph.hx",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ai/1,0,0/de/polygonal/ai/pathfinding/AStarWaypoint.hx",
-		"/D/Projects/loop packets game/default/source/CustomWaypoint.hx",
 		"/C/HaxeToolkit/haxe/lib/polygonal-ds/2,0,0-beta/src/de/polygonal/ds/Heapable.hx",
 		"/D/Projects/loop packets game/default/assets/data/data.csv",
 		"/D/Projects/loop packets game/default/FlxProject.sublime-project",
@@ -286,7 +292,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -301,6 +307,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"CustomWaypoint",
+			"filePackets",
 			"]",
 			"[",
 			"NetworkController.hx:46: ",
@@ -418,15 +426,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3321,
+						"buffer_size": 4051,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3103,
-								3103
+								3146,
+								3154
 							]
 						],
 						"settings":
@@ -436,7 +444,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2164.0,
+						"translation.y": 848.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -444,30 +452,32 @@
 				},
 				{
 					"buffer": 2,
-					"file": "assets/data/datatraffic.csv",
+					"file": "source/NetworkGraph.hx",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 123811,
+						"buffer_size": 3474,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								132,
-								132
+								301,
+								241
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"haxe-build-id": 0,
+							"syntax": "Packages/Haxe/Haxe.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 55.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -476,15 +486,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1580,
+						"buffer_size": 1550,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								622,
-								622
+								411,
+								411
 							]
 						],
 						"settings":
@@ -494,10 +504,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 92.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
