@@ -10,8 +10,8 @@ import flixel.util.FlxSpriteUtil.LineStyle;
 import flixel.math.FlxRandom;
 // import flixel.util.FlxSave;
 
-import de.polygonal.ai.pathfinding.AStar;
-import de.polygonal.ai.pathfinding.AStarWaypoint;
+// import de.polygonal.ai.pathfinding.AStar;
+// import de.polygonal.ai.pathfinding.AStarWaypoint;
 import de.polygonal.ds.ArrayList;
 import de.polygonal.ds.Graph;
 import de.polygonal.ds.GraphNode;
@@ -33,18 +33,9 @@ class NetworkController extends FlxGroup
 		add(_graph);
 		add(_packets);
 
-
 		generateTestPackets();
 
-		for (p in _packets)
-		{
-			trace(p.toCss());
-		}
-
-		for (d in _networkData)
-		{
-			trace(d);
-		}
+		generateCSV();
 
 	}
 
@@ -122,26 +113,20 @@ class NetworkController extends FlxGroup
 
 					// calculate travel
 					var time:Int = timeToSend;
-					var pN:CustomWaypoint = currentNode;
+					var pN:AStarWaypoint = currentNode;
 
 					for (n in route)
 					{
 						var data:Array<Int> = new Array<Int>();
-						if (n == pN)
-						{
-							data = [ packetID, currentNode.id, time ];
-						}
-						else
-						{
-							var s = pN;
-							var e = n;
-							var d:Float = s.distanceTo(e);
 
-							// divide by 10 to reduce times
-							time += Std.int(d/10);
-							
-							data = [ packetID, s.id, time ];
-						}
+						var s = pN;
+						var e = n;
+						var d:Float = s.distanceTo(e);
+
+						// divide by 10 to reduce times
+						time += Std.int(d/10);
+						
+						data = [ packetID, e.id, time ];
 
 						_networkData.push(data);
 
@@ -156,15 +141,37 @@ class NetworkController extends FlxGroup
 				}
 			}
 		}
-
-
-		
-
 	}
 
-	private function makeNetworkData(route:ArrayList<AStarWaypoint>)
+	private function generateCSV()
 	{
-			
+		var filePackets:String = "./packets.csv";
+		var fileNetwork:String = "./networkData.csv";
+
+		if (sys.FileSystem.exists(filePackets)) sys.FileSystem.deleteFile(filePackets);
+		sys.io.File.saveContent(filePackets, "name, startNode, endNode, route\r\n");
+		
+		if (sys.FileSystem.exists(fileNetwork)) sys.FileSystem.deleteFile(fileNetwork);
+		sys.io.File.saveContent(fileNetwork, "packet, Node, Time\r\n");
+
+		for (p in _packets)
+		{
+			// trace(p.toCsv());
+			var fp = sys.io.File.append(filePackets);
+	        fp.writeString(p.toCsv() + "\r\n");
+	        fp.close();
+		}
+
+		for (d in _networkData)
+		{
+			// trace(d);
+			var str:String = d.toString();
+			str = str.substr(1,str.indexOf("]")-1);
+
+			var fn = sys.io.File.append(fileNetwork);
+	        fn.writeString(str + "\r\n");
+	        fn.close();
+		}
 	}
 	
 }

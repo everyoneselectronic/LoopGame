@@ -51,12 +51,12 @@ class Packet extends FlxBasic
 		return "name:" + _name + ", start:" + _startNode + ", end:" + _endNode + ", route:" + route;
 	}
 
-	public function toCss():String 
+	public function toCsv():String 
 	{
 		var route:String = "[";
 		for (n in 0..._route.size)
 		{
-			var c:String = "-";
+			var c:String = "->";
 			if (n == _route.size-1) c = "]";
 			var s = _route.get(n) + c;
 			route += s;

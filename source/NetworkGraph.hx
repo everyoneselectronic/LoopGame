@@ -20,7 +20,7 @@ using flixel.util.FlxSpriteUtil;
 class NetworkGraph extends FlxGroup
 {
 	private var _graph:Graph<AStarWaypoint>;
-	private var _wayPoints:ArrayList<CustomWaypoint>;
+	private var _wayPoints:ArrayList<AStarWaypoint>;
 	
 	private var _astar:AStar;
 	
@@ -55,7 +55,7 @@ class NetworkGraph extends FlxGroup
 		_graph = new Graph<AStarWaypoint>();
 		_astar = new AStar(_graph);
 		
-		_wayPoints = new ArrayList<CustomWaypoint>();
+		_wayPoints = new ArrayList<AStarWaypoint>();
 		
 		//create nodes + waypoints
 		var i = 0;
@@ -66,7 +66,7 @@ class NetworkGraph extends FlxGroup
 			var nodeY = nodeData[i++];
 			
 			//create a waypoint object for each node
-			var wp  = new CustomWaypoint(id++);
+			var wp  = new AStarWaypoint(id++);
 			wp.x    = nodeX;
 			wp.y    = nodeY;
 			wp.node = _graph.addNode(_graph.createNode(wp));
@@ -115,7 +115,7 @@ class NetworkGraph extends FlxGroup
 		return _graph;
 	}
 
-	public function get_waypoints():ArrayList<CustomWaypoint>
+	public function get_waypoints():ArrayList<AStarWaypoint>
 	{
 		return _wayPoints;
 	}
