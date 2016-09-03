@@ -34,9 +34,8 @@ class NetworkController extends FlxGroup
 		add(_graph);
 		add(_packets);
 
-		generateTestPackets();
-
-		generateCSV();
+		// generateTestPackets();
+		// generateCSV();
 
 	}
 
