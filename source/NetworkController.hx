@@ -22,7 +22,11 @@ class NetworkController extends FlxGroup
 	private var _packets:FlxTypedGroup<Packet>;
 	private var _graph:NetworkGraph;
 
-	private var _networkData:Array<Array<Int>>;
+	private var _networkData:Array<Array<Int>> = [];
+
+	private var _currentTime:Int = 0;
+	private var _timeFrame:Int = 1000;
+	private var numPacketRange:Array<Int> = [10,50];
 
 	override public function new():Void
 	{
@@ -34,21 +38,47 @@ class NetworkController extends FlxGroup
 		add(_graph);
 		add(_packets);
 
-		// generateTestPackets();
-		// generateCSV();
+		// trace(Data.arcData);
 
+		generateTestPackets();
+		// generateTestPackets();
+		generateCSV();
+
+	}
+
+	private function deleteUsedNetworkData(endTime)
+	{
+		if (_networkData.length > 0)
+		{
+			var i:Int = 0;
+			var t:Int = _networkData.length;
+			while (i < t)
+			{
+				var d = _networkData[i];
+				if (d[2] < endTime)
+				{
+					// trace("del: " + d);
+					_networkData.splice(i, 1);
+					// _networkData.remove(d);
+					t--;
+				} else i++;
+			}
+		}
 	}
 
 	private function generateTestPackets()
 	{
-		_networkData = new Array<Array<Int>>();
+		// _networkData = new Array<Array<Int>>();
 
 		var waypoints = _graph.get_waypoints();
-		var timeFrame:Int = 1000;
-		var baseTime:Int = 0;
-		var endTime:Int = baseTime + timeFrame;
+		var baseTime:Int = _currentTime;
+		var endTime:Int = baseTime + _timeFrame;
 
-		var packetID:Int = 0;
+		_currentTime = endTime + 1;
+
+		deleteUsedNetworkData(baseTime);
+
+		var packetID:Int = _packets.length;
 
 		// generate packets, packet groups for each node
 		for (node in waypoints)
@@ -56,7 +86,7 @@ class NetworkController extends FlxGroup
 			var currentNode = node;
 
 			// total packets to be sent from this node
-			var numPackets:Int = FlxG.random.int(100,500);
+			var numPackets:Int = FlxG.random.int(numPacketRange[0],numPacketRange[1]);
 
 			// make packet groups
 			var packetGroups:Array<Int> = new Array<Int>();
@@ -145,30 +175,57 @@ class NetworkController extends FlxGroup
 
 	private function generateCSV()
 	{
-		var filePackets:String = "./packets.csv";
-		var fileNetwork:String = "./networkData.csv";
+		// var filePackets:String = "./packets.csv";
+		// var fileNetwork:String = "./networkData.csv";
 
-		if (sys.FileSystem.exists(filePackets)) sys.FileSystem.deleteFile(filePackets);
-		sys.io.File.saveContent(filePackets, "name, startNode, endNode, route\r\n");
+		var fileNetworkTraffic:String = "./networkTrafficData.csv";
+
+		// if (sys.FileSystem.exists(filePackets)) sys.FileSystem.deleteFile(filePackets);
+		// sys.io.File.saveContent(filePackets, "name, startNode, endNode, route\r\n");
 		
-		if (sys.FileSystem.exists(fileNetwork)) sys.FileSystem.deleteFile(fileNetwork);
-		sys.io.File.saveContent(fileNetwork, "packet, Node, Time\r\n");
+		// if (sys.FileSystem.exists(fileNetwork)) sys.FileSystem.deleteFile(fileNetwork);
+		// sys.io.File.saveContent(fileNetwork, "packet, Node, Time\r\n");
 
-		for (p in _packets)
-		{
-			// trace(p.toCsv());
-			var fp = sys.io.File.append(filePackets);
-	        fp.writeString(p.toCsv() + "\r\n");
-	        fp.close();
-		}
+		if (sys.FileSystem.exists(fileNetworkTraffic)) sys.FileSystem.deleteFile(fileNetworkTraffic);
+		sys.io.File.saveContent(fileNetworkTraffic, "packetID, packetName, packetRoute, currentTime, currentNode, startNode, endNode\r\n");
+
+		// for (p in _packets)
+		// {
+		// 	// trace(p.toCsv());
+		// 	var fp = sys.io.File.append(filePackets);
+	 //        fp.writeString(p.toCsv() + "\r\n");
+	 //        fp.close();
+		// }
+
+		// for (d in _networkData)
+		// {
+		// 	// trace(d);
+		// 	var str:String = d.toString();
+		// 	str = str.substr(1,str.indexOf("]")-1);
+
+		// 	var fn = sys.io.File.append(fileNetwork);
+	 //        fn.writeString(str + "\r\n");
+	 //        fn.close();
+		// }
 
 		for (d in _networkData)
 		{
-			// trace(d);
-			var str:String = d.toString();
-			str = str.substr(1,str.indexOf("]")-1);
+			var id:Int = d[0];
+			var p = _packets.members[id];
+			var pArray = p.toArray();
 
-			var fn = sys.io.File.append(fileNetwork);
+			var packetID:String = Std.string(d[0]);
+			var packetName:String = Std.string(pArray[0]);
+			var packetRoute:String = Std.string(pArray[3]);
+			var currentTime:String = Std.string(d[2]);
+			var currentNode:String = Std.string(d[1]);
+			var startNode:String = Std.string(pArray[1]);
+			var endNode:String = Std.string(pArray[2]);
+
+
+			var str = packetID + ", " + packetName + ", " + packetRoute + ", " + currentTime + ", " + currentNode + ", " + startNode + ", " + endNode;
+
+			var fn = sys.io.File.append(fileNetworkTraffic);
 	        fn.writeString(str + "\r\n");
 	        fn.close();
 		}

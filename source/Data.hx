@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.util.FlxArrayUtil;
 
 class Data
 {
@@ -55,6 +56,8 @@ class Data
 			[-508,492],
 			[-580,-355]
 		];
+
+	public static var nodeDataStr:Array<String> = [];
 
 	public static var svgData = 
 		[
@@ -145,40 +148,54 @@ class Data
 
 	public static var arcData:Array<Array<Int>> = [];
 
+	public static var largestCoords:Array<Int> = [0,0];
+
 	public static function parseData()
 	{
+		for (s in nodeData)
+		{
+			nodeDataStr.push(s.toString());
+		}
+
 		var id:Int = 0;
 		for (a in nodeData)
 		{
+			var strA:String = a.toString();
+
 			for (b in svgData)
 			{
-				if (b.indexOf(a) < -1)
+				var strB:String = b.toString();
+				
+				if (strB.indexOf(strA) > -1)
 				{
 					for (c in b)
 					{
+						var strC:String = c.toString();
 						// check to see if exisits in arcdata
-						if (a == c)
+						if (strA != strC)
 						{
-							// do nothing
-						}
-						else
-						{
-							var data:Array<Int> = [id,nodeData.indexOf(c)]
+							var data:Array<Int> = [id,nodeDataStr.indexOf(strC)];
 							var exists:Bool = false;
 
-							for (d in arcData)
+							if (arcData.length > 0)
 							{
-								if (d.indexOf(data[0]) < -1 && d.indexOf(data[1]) < -1)
+								for (d in arcData)
 								{
-									exists = true;
-									break;
+									if (d.indexOf(data[0]) > -1 && d.indexOf(data[1]) > -1)
+									{
+										exists = true;
+										// break;
+									}
+								}
+
+								if (!exists) {
+									arcData.push(data);
 								}
 							}
-
-							if (!exists) {
+							else
+							{
 								arcData.push(data);
 							}
-							
 						}
 
 						
@@ -189,8 +206,46 @@ class Data
 				
 			id++;
 		}
-	}
 
+		var lowestNumberX:Int = 0;
+		var lowestNumberY:Int = 0;
+
+		var highestNumberX:Int = 0;
+		var highestNumberY:Int = 0;
+
+		// make all coordinate postive
+		for (n in nodeData)
+		{
+			if (n[0] < lowestNumberX) lowestNumberX = n[0];
+			if (n[1] < lowestNumberY) lowestNumberY = n[1];
+
+			if (n[0] > highestNumberX) highestNumberX = n[0];
+			if (n[1] > highestNumberY) highestNumberY = n[1];
+		}
+
+		if (lowestNumberX < 0)
+		{
+			for (n in 0...nodeData.length)
+			{
+				nodeData[n][0] = nodeData[n][0] - lowestNumberX;
+			}
+
+			highestNumberX = highestNumberX - lowestNumberX;
+		}
+
+		if (lowestNumberY < 0)
+		{
+			for (n in 0...nodeData.length)
+			{
+				nodeData[n][1] = nodeData[n][1] - lowestNumberY;
+			}
+
+			highestNumberY = highestNumberY - lowestNumberY;
+		}
+
+		largestCoords = [highestNumberX,highestNumberY];
+
+	}
 
 	
 }

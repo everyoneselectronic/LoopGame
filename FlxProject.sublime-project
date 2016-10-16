@@ -36,5 +36,10 @@
 			"name": "polygonal-ai",
 			"path": "C:\\HaxeToolkit\\haxe\\lib\\polygonal-ai/1,0,0/"
 		},
+		{
+			"follow_symlinks": true,
+			"name": "thx.core",
+			"path": "C:\\HaxeToolkit\\haxe\\lib\\thx,core/0,40,1/"
+		},
 	]
 }

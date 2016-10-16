@@ -45,8 +45,7 @@
 	<!--<haxelib name="nape" />-->
 
 	<haxelib name="polygonal-ds" />
-	<haxelib name="polygonal-ai" />
-
+	
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<!--Enable the Flixel core recording system-->

@@ -7,8 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
-
-import flixel.FlxGame;
+import flixel.FlxCamera;
 
 // import flixel.group.FlxGroup.FlxTypedGroup;
 
@@ -20,6 +19,9 @@ import flixel.FlxGame;
 
 class MenuState extends FlxState
 {
+	private var player:FlxSprite;
+	private var playerSpeed:Int = 800;
+
 	override public function create():Void
 	{
 		// packets = new FlxTypedGroup<Packet>();
@@ -30,6 +32,12 @@ class MenuState extends FlxState
 
 		var network = new NetworkController();
 		add(network);
+
+		player = new FlxSprite(100, 100);
+		player.makeGraphic(10,10);
+        add(player);
+
+        FlxG.camera.follow(player);
 		
 		super.create();
 	}
@@ -37,15 +45,14 @@ class MenuState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-	}
 
-	// public static function makePacket(route)
-	// {
-	// 	var packet = new Packet(route);
-	// 	packet.makeGraphic(4,10,FlxG.random.color());
-	// 	var start = route.get(0);
-	// 	packet.setPosition(start.x,start.y);
-	// 	packets.add(packet);
-	// 	packet.ID = packets.length;
-	// }
+		// Reset velocity by default, if not moving
+        player.velocity.set(0,0);
+
+        // Move player
+        if (FlxG.keys.pressed.UP) player.velocity.y = -playerSpeed;
+        if (FlxG.keys.pressed.DOWN) player.velocity.y = playerSpeed;
+        if (FlxG.keys.pressed.LEFT) player.velocity.x = -playerSpeed;
+        if (FlxG.keys.pressed.RIGHT) player.velocity.x = playerSpeed;
+	}
 }

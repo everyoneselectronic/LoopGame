@@ -66,4 +66,44 @@ class Packet extends FlxBasic
 		return _name + "," + _startNode + "," + _endNode + "," + route;
 	}
 
+	public function toArray():Array<Dynamic>
+	{
+		var a:Array<Dynamic> = new Array<Dynamic>();
+		var route:String = "[";
+		for (n in 0..._route.size)
+		{
+			var c:String = "->";
+			if (n == _route.size-1) c = "]";
+			var s = _route.get(n) + c;
+			route += s;
+		}
+
+		a.push(_name);
+		a.push(_startNode);
+		a.push(_endNode);
+		a.push(route);
+
+		return a;
+	}
+
+	public function getRoute():ArrayList<AStarWaypoint>
+	{
+		return _route;
+	}
+
+	public function getName():String
+	{
+		return _name;
+	}
+
+	public function getStartNode():AStarWaypoint
+	{
+		return _startNode;
+	}
+
+	public function getEndNode():AStarWaypoint
+	{
+		return _endNode;
+	}
+
 }

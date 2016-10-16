@@ -38,9 +38,7 @@ class NetworkGraph extends FlxGroup
 	
 	function _buildGraph()
 	{
-		_canvas = new FlxSprite();
-		_canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
-		add(_canvas);
+
 		//an array of point coordinates:
 		//the first point's x coordinate is at index [0] and its y coordinate at index [1],
 		//followed by the coordinates of the remaining points.
@@ -50,9 +48,14 @@ class NetworkGraph extends FlxGroup
 		//the source node is at index [0], target node at index[1], followed by all remaining arcs.
 		// var arcData = [9,10,10,11,11,9,7,9,11,7,6,5,5,9,9,6,3,5,6,3,2,0,0,3,3,2,0,1,1,3,1,4,4,3,5,8,8,9,4,5,2,6,6,7,7,2,8,10,4,8];
 		
-		var nodeData = Data.nodeData;
 		Data.parseData();
+		var nodeData = Data.nodeData;
 		var arcData = Data.arcData;
+
+		var nodeGraphicSize:Int = 10;
+		_canvas = new FlxSprite();
+		_canvas.makeGraphic(Data.largestCoords[0]+nodeGraphicSize, Data.largestCoords[1]+nodeGraphicSize, FlxColor.TRANSPARENT, true);
+		add(_canvas);
 
 		// nodeData = _editor.getNodeData();
 		// arcData = _editor.getArcData();
@@ -63,15 +66,13 @@ class NetworkGraph extends FlxGroup
 		_wayPoints = new ArrayList<AStarWaypoint>();
 		
 		//create nodes + waypoints
-		var i = 0;
-		var id = 0;
-		while (i < nodeData.length)
+		for (i in nodeData)
 		{
-			var nodeX = nodeData[i++];
-			var nodeY = nodeData[i++];
+			var nodeX = i[0];
+			var nodeY = i[1];
 			
 			//create a waypoint object for each node
-			var wp  = new AStarWaypoint(id++);
+			var wp  = new AStarWaypoint(nodeData.indexOf(i));
 			wp.x    = nodeX;
 			wp.y    = nodeY;
 			wp.node = _graph.addNode(_graph.createNode(wp));
@@ -80,15 +81,13 @@ class NetworkGraph extends FlxGroup
 
 			// make visual nodes
 			_canvas.drawRect(wp.x, wp.y, 10, 10, FlxColor.RED);
-
 		}
 		
 		//create arcs between nodes
-		var i = 0;
-		while (i < arcData.length)
+		for (a in arcData)
 		{
-			var index0 = arcData[i++];
-			var index1 = arcData[i++];
+			var index0 = a[0];
+			var index1 = a[1];
 			var source = _wayPoints.get(index0).node;
 			var target = _wayPoints.get(index1).node;
 			
@@ -99,7 +98,6 @@ class NetworkGraph extends FlxGroup
 			var end = _wayPoints.get(index1);
 			var lineStyle:LineStyle = { thickness: 1, color: FlxColor.WHITE };
 			_canvas.drawLine(start.x, start.y, end.x, end.y, lineStyle);
-
 		}
 	}
 
