@@ -41,9 +41,14 @@ class NetworkController extends FlxGroup
 		// trace(Data.arcData);
 
 		generateTestPackets();
-		// generateTestPackets();
 		generateCSV();
 
+	}
+
+	public function updatePackets()
+	{
+		generateTestPackets();
+		generateCSV();
 	}
 
 	private function deleteUsedNetworkData(endTime)
@@ -51,16 +56,12 @@ class NetworkController extends FlxGroup
 		if (_networkData.length > 0)
 		{
 			var i:Int = 0;
-			var t:Int = _networkData.length;
-			while (i < t)
+			while (i < _networkData.length)
 			{
 				var d = _networkData[i];
 				if (d[2] < endTime)
 				{
-					// trace("del: " + d);
 					_networkData.splice(i, 1);
-					// _networkData.remove(d);
-					t--;
 				} else i++;
 			}
 		}
@@ -68,8 +69,6 @@ class NetworkController extends FlxGroup
 
 	private function generateTestPackets()
 	{
-		// _networkData = new Array<Array<Int>>();
-
 		var waypoints = _graph.get_waypoints();
 		var baseTime:Int = _currentTime;
 		var endTime:Int = baseTime + _timeFrame;
@@ -175,39 +174,16 @@ class NetworkController extends FlxGroup
 
 	private function generateCSV()
 	{
-		// var filePackets:String = "./packets.csv";
-		// var fileNetwork:String = "./networkData.csv";
-
+		// set file path
 		var fileNetworkTraffic:String = "./networkTrafficData.csv";
 
-		// if (sys.FileSystem.exists(filePackets)) sys.FileSystem.deleteFile(filePackets);
-		// sys.io.File.saveContent(filePackets, "name, startNode, endNode, route\r\n");
-		
-		// if (sys.FileSystem.exists(fileNetwork)) sys.FileSystem.deleteFile(fileNetwork);
-		// sys.io.File.saveContent(fileNetwork, "packet, Node, Time\r\n");
-
+		// delete file of exsits
 		if (sys.FileSystem.exists(fileNetworkTraffic)) sys.FileSystem.deleteFile(fileNetworkTraffic);
+		
+		// create csv header
 		sys.io.File.saveContent(fileNetworkTraffic, "packetID, packetName, packetRoute, currentTime, currentNode, startNode, endNode\r\n");
 
-		// for (p in _packets)
-		// {
-		// 	// trace(p.toCsv());
-		// 	var fp = sys.io.File.append(filePackets);
-	 //        fp.writeString(p.toCsv() + "\r\n");
-	 //        fp.close();
-		// }
-
-		// for (d in _networkData)
-		// {
-		// 	// trace(d);
-		// 	var str:String = d.toString();
-		// 	str = str.substr(1,str.indexOf("]")-1);
-
-		// 	var fn = sys.io.File.append(fileNetwork);
-	 //        fn.writeString(str + "\r\n");
-	 //        fn.close();
-		// }
-
+		// write csv data
 		for (d in _networkData)
 		{
 			var id:Int = d[0];
@@ -222,7 +198,6 @@ class NetworkController extends FlxGroup
 			var startNode:String = Std.string(pArray[1]);
 			var endNode:String = Std.string(pArray[2]);
 
-
 			var str = packetID + ", " + packetName + ", " + packetRoute + ", " + currentTime + ", " + currentNode + ", " + startNode + ", " + endNode;
 
 			var fn = sys.io.File.append(fileNetworkTraffic);
@@ -230,5 +205,5 @@ class NetworkController extends FlxGroup
 	        fn.close();
 		}
 	}
-	
+
 }

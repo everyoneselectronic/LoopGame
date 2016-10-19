@@ -22,6 +22,8 @@ class MenuState extends FlxState
 	private var player:FlxSprite;
 	private var playerSpeed:Int = 800;
 
+	private var network:NetworkController;
+
 	override public function create():Void
 	{
 		// packets = new FlxTypedGroup<Packet>();
@@ -30,7 +32,7 @@ class MenuState extends FlxState
 		// add(test);
 		// add(packets);
 
-		var network = new NetworkController();
+		network = new NetworkController();
 		add(network);
 
 		player = new FlxSprite(100, 100);
@@ -54,5 +56,7 @@ class MenuState extends FlxState
         if (FlxG.keys.pressed.DOWN) player.velocity.y = playerSpeed;
         if (FlxG.keys.pressed.LEFT) player.velocity.x = -playerSpeed;
         if (FlxG.keys.pressed.RIGHT) player.velocity.x = playerSpeed;
+
+        if (FlxG.keys.pressed.SPACE) network.updatePackets();
 	}
 }
